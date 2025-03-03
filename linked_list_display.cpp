@@ -7,6 +7,17 @@ struct Node
     Node *next;
 };
 
+void Display(struct Node *p)
+{
+    if(p!=nullptr)
+    {
+        cout << p->data;
+        if(p->next != nullptr)
+            cout << " -> ";
+        Display(p->next);
+    }
+}
+
 int main()
 {
     int A[] = {3, 5, 7, 10, 15};
@@ -46,7 +57,10 @@ int main()
         }
         p = p->next;
     }
+
+    cout << endl;
     
+    Display(head);
     cout << endl;
 
     return 0;
