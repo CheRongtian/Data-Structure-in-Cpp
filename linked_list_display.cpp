@@ -6,6 +6,7 @@ struct Node
     int data;
     Node *next;
 };
+Node* first = nullptr;
 
 void Display(struct Node *p)
 {
@@ -16,6 +17,122 @@ void Display(struct Node *p)
             cout << " -> ";
         Display(p->next);
     }
+}
+
+int CountNode(struct Node *p)
+{
+    int c = 0;
+    while(p!=0)
+    {
+        c++;
+        p = p->next;
+    }
+    return c;
+}
+
+int Countnode(struct Node *p)
+{
+    if (p==0) return 0;
+    else return Countnode(p->next)+1;
+}
+
+int Add(struct Node *p)
+{
+    int sum = 0;
+    while(p)
+    {
+        sum += p->data;
+        p = p->next;
+    }
+    return sum;
+}
+
+int add (struct Node *p)
+{
+    if(p==0) return 0;
+    else return add(p->next) + p->data;
+}
+
+int FindMax(struct Node *p)
+{
+    int max = -32786;
+    while(p)
+    {
+        if(p->data > max)
+            max = p->data;
+        p = p->next;
+    }
+    return max;
+}
+
+int Findmax(struct Node *p)
+{
+    int x=0;
+    if(p==0) return -32786;
+    else
+    {
+        x = Findmax(p->next);
+        if(x > p->data) return x;
+        else return p->data;
+    }
+}
+
+int findmax(struct Node *p)
+{
+    int x = 0;
+    if(p==0) return INT_MIN;
+    x = findmax(p->next);
+    return (x > p->data)? x:p->data; // another form
+}
+
+Node* Search(struct Node *p, int key)
+{
+    while(p!=nullptr)
+    {
+        if(key == p->data) return p;
+        p = p->next;
+    }
+    return nullptr;
+}
+
+Node* search(struct Node *p, int key)
+{
+    if(p == nullptr) return nullptr;
+    if(key == p->data) return p;
+    else return search(p->next, key);
+}
+
+Node* Search2(Node* p, int key, int& position)
+{
+    position = 1;
+    while (p != nullptr)
+    {
+        if (p->data == key)
+            return p;
+        p = p->next;
+        position++;
+    }
+    position = -1;
+    return nullptr;
+}
+
+Node* ImproveLinearSearch(Node *p, int key)
+{
+    Node *q = nullptr;
+    while(p!=nullptr)
+    {
+        if(key == p->data)
+        {
+            q->next = p->next;
+            p->next = first;
+            first = p;
+        }
+        return p;
+
+        q = p;
+        p = p->next;
+        return nullptr;
+    } 
 }
 
 int main()
@@ -63,5 +180,26 @@ int main()
     Display(head);
     cout << endl;
 
+    cout <<"The node number is: "<< CountNode(head) << endl;
+    cout <<"The node number is: "<< Countnode(head) << endl;
+    cout <<"The sum of nodes is: "<< Add(head) << endl;
+    cout <<"The sum of nodes is: "<< add(head) << endl;
+    cout <<"The max node is: "<< FindMax(head) << endl;
+    cout <<"The max node is: "<< Findmax(head) << endl;
+    cout <<"The max node is: "<< findmax(head) << endl;
+    
+    int key=7;
+    if(Search(head, key)) cout << "Found " << key << " in the linked list." << endl;
+    else cout << key << " is not in the linked list" << endl;
+
+    if(search(head, key)) cout << "Found " << key << " in the linked list." << endl;
+    else cout << key << " is not in the linked list" << endl;
+
+    int pos;
+    if(Search2(head, key, pos))
+       cout << "It is the " << pos << "th node. (Address: " << Search2(head, key, pos) << ")" << endl;
+    
+    if(ImproveLinearSearch(head, key)) cout << "Found " << key << " in the linked list." << endl;
+    else cout << key << " is not in the linked list" << endl;
     return 0;
 }
