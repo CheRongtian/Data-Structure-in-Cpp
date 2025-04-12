@@ -134,6 +134,58 @@ void RemoveDuplicated(Node* &head)
     }
 }
 
+void ReverseAuxArray(Node* &head)
+{
+    Node* p = new Node;
+    p = head;
+    int i = 0;
+    while(p)
+    {
+        p = p->next;
+        i++;
+    }
+    int *A = new int [i]; // Allocate array with correct size
+
+    p = head;
+    for(int j = 0; j < i; j++)
+    {
+        A[j] = p->data;
+        p = p->next;
+    }
+
+    p = head;
+    for (int j = i - 1; j >= 0; j--)
+    {
+        p->data = A[j];
+        p = p->next;
+    }
+
+    delete[] A;
+}
+
+void ReverseSlidingPtr(Node* &head)
+{
+    Node* p = head; Node* q = nullptr; Node* r = nullptr;
+    while(p)
+    {
+        r = q;
+        q = p;
+        p = p->next;
+        q->next = r;
+    }
+    head = q;
+}
+
+void ReverseReverse(Node* p, Node* q, Node* &head)
+{
+    if(p)
+    {
+        ReverseReverse(p->next, p, head);
+        p->next = q;
+    }
+    else head = q;
+}
+
 int main()
 {
     int A[] = {8, 3, 9, 7, 6};
@@ -146,6 +198,10 @@ int main()
     Node* last2 = nullptr;
     for(int i=0; i<sizeof(B) / sizeof(B[0]); i++) InsertLast(head2, last2, B[i]);
     
+    int C[] = {2, 4, 6, 8};
+    Node* head3 = nullptr;
+    Node* last3 = nullptr;
+    for(int i=0; i<sizeof(C) / sizeof(C[0]); i++) InsertLast(head3, last3, C[i]);
 
     Display(head1); cout << endl;
 
@@ -176,6 +232,12 @@ int main()
 
     InsertInASortedLL(head2, 18);
     Display(head2); cout << endl;
+    cout << endl;
+
+    Display(head3); cout << endl;
+    ReverseAuxArray(head3); Display(head3); cout << endl;
+    ReverseSlidingPtr(head3); Display(head3); cout << endl;
+    ReverseReverse(head3, nullptr, head3); Display(head3); cout << endl;
 
     return 0;
 }
