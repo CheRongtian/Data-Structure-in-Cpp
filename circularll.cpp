@@ -98,6 +98,65 @@ void DisplayCirLL(Node* p)
     }
 }
 
+void Insert(int pos, int x, Node* head)
+{
+    Node* t; Node* p;
+    int i;
+    if(pos == 0)
+    {
+        t = new Node;
+        t->data = x;
+        if(head == nullptr)
+        {
+            head = t;
+            head->next = head;
+        }
+        else
+        {
+            p=head;
+            while(p->next!=head) p=p->next;
+            p->next=t; t->next=head; head=t;
+        }
+    }
+    else
+    {
+        p=head;
+        for(i=0;i<pos-1;i++) p=p->next;
+        t=new Node;
+        t->data = x; t->next = p->next; p->next = t;
+    }
+}
+
+int Delete(int pos, Node* head)
+{
+    Node* p; Node* q; int x;
+    if(pos==1)
+    {
+        p=head;
+        while(p->next!=head) p=p->next;
+        x = head->data;
+        if(p==head)
+        {
+            delete head;
+            head = nullptr;
+        }
+        else
+        {
+            p->next = head->next;
+            delete head; head = p->next;
+        }
+    }
+    else
+    {
+        p=head;
+        for(int i=0;i<pos-1;i++) p=p->next;
+        q = p->next;
+        p->next = q->next; x = q->data;
+        delete q;
+    }
+    return x;
+}
+
 int main()
 {
     
@@ -112,6 +171,8 @@ int main()
     Node* head2 = createCircular(B, 5);
     Displaycirll(head2); cout << endl;
     DisplayCirLL(head2); cout << endl;
+    Insert(4, 10, head2); DisplayCirLL(head2); cout << endl;
+    Delete(4, head2); DisplayCirLL(head2); cout << endl; 
 
     return 0;
 }
