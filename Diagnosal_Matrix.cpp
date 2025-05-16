@@ -1,23 +1,23 @@
 # include <iostream>
 using namespace std;
 
-class Diagnosal
+class Lower_Tri_M
 {
     private:
         int *A;
         int n;
     public:
-        Diagnosal()
+        Lower_Tri_M()
         {
             n=2;
             A=new int [2];
         }
-        Diagnosal(int n)
+        Lower_Tri_M(int n)
         {
             this->n = n; //this->n : n in private
             A = new int [n];
         }
-        ~Diagnosal()
+        ~Lower_Tri_M()
         {
             delete []A;
         }
@@ -25,18 +25,18 @@ class Diagnosal
         int Get(int i, int j);
         void Display();
 };
-void Diagnosal::Set(int i, int j, int x)
+void Lower_Tri_M::Set(int i, int j, int x)
 {
     if(i==j) A[i-1] = x;
 }
 
-int Diagnosal::Get(int i, int j)
+int Lower_Tri_M::Get(int i, int j)
 {
     if(i==j) return A[i-1];
     return 0;
 }
 
-void Diagnosal::Display()
+void Lower_Tri_M::Display()
 {
     for(int i=0; i<n; i++)
     {
@@ -51,7 +51,7 @@ void Diagnosal::Display()
 
 int main()
 {
-    Diagnosal d(4);
+    Lower_Tri_M d(4);
 
     d.Set(1,1,5);
     d.Set(2,2,8);
