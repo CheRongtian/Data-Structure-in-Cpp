@@ -11,8 +11,8 @@
 
 #### Studied Concepts
 - Time and space complexity analysis using recurrence relations  
-- Hashing and collision resolution (conceptual)  
-- Graph fundamentals (BFS / DFS to be implemented later)  
+- *Hashing* and *collision* resolution 
+- *Graph* fundamentals
 - **Greedy algorithms, dynamic programming, and backtracking:** studied at a conceptual level, with pseudocode understanding of problems such as knapsack, N-Queens, and shortest path.  
 
 ---
